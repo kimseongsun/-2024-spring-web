@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect";
 import SideBar from "../sideBar/SideBar";
+import Feedback from "./Feedback";
 import "../CSS/home.css"; // CSS 파일을 가져옵니다.
 
 import axios from "axios";
@@ -9,8 +10,6 @@ const Home = () => {
   const [txtValue, setTextValue] = useState(""); // 빈 배열
   const [printedValues, setPrintedValues] = useState([]); // 출력할 값 저장
   const scrollRef = useRef(null); // 스크롤을 제어할 ref
-  const [feedbackTxt, setFeedbackTxt] = useState("");
-  const [evaluation, setEvaluation] = useState(false); // 기본 값 true로 설정
 
   let image_link = "";
 
@@ -47,29 +46,9 @@ const Home = () => {
     setTextValue("");
   }
 
-  // feedback을 post하는 함수
-  async function postFeedback() {
-    console.log("함수 진입 성공!!");
-    const response = await axios.post("/api/feedback", {
-      user_feedback: feedbackTxt,
-      evaluation: evaluation,
-    });
-  }
-
   // 입력값 변화 핸들러
   const onChange = (e) => {
     setTextValue(e.target.value);
-  };
-
-  // 피드백 입력값 변화 핸들러
-  const onChange_feedback = (e) => {
-    setFeedbackTxt(e.target.value);
-  };
-
-  // 평가 선택 핸들러
-  const onChange_evaluation = (e) => {
-    setEvaluation(e.target.value === "good" ? false : true);
-    console.log(evaluation);
   };
 
   // 입력값 엔터 또는 클릭 핸들러
@@ -91,6 +70,8 @@ const Home = () => {
       <SideBar />
       <div className="home-container">
         <h1>Game Recommend GPT Service</h1>
+
+        {/*  */}
         <div ref={scrollRef} className="output-container">
           {printedValues.map((entry, index) => (
             <div key={index}>
@@ -110,22 +91,16 @@ const Home = () => {
                   />
                   <Typewriter
                     onInit={(typewriter) => {
-                      typewriter
-                        .typeString(entry.answer)
-                        .start()
-                        .pauseFor(100)
-                        .callFunction((state) => {
-                          state.elements.cursor.style.display = "none";
-                        })
-                        .callFunction(() => {
-                          if (scrollRef.current) {
-                            scrollRef.current.scrollTop =
-                              scrollRef.current.scrollHeight;
-                          }
-                        });
+                      typewriter.typeString(entry.answer).start().pauseFor(100);
+                    }}
+                    onStep={(step, typewriter) => {
+                      if (scrollRef.current) {
+                        scrollRef.current.scrollTop =
+                          scrollRef.current.scrollHeight;
+                      }
                     }}
                     options={{
-                      delay: 20,
+                      delay: 1,
                     }}
                   />
                 </div>
@@ -134,6 +109,7 @@ const Home = () => {
             </div>
           ))}
         </div>
+        {/*  */}
 
         <div className="input-container">
           <input
@@ -145,43 +121,8 @@ const Home = () => {
           <button onClick={handleKeyPress}>print</button>
         </div>
       </div>
-      <div className="feedback-container">
-        <div style={{ width: "500px" }}>
-          <img
-            src="./cat.png"
-            style={{ maxWidth: "50%", height: "auto", paddingTop: "10px" }}
-          />
-        </div>
-        <h3>feedback</h3>
-        <input
-          type="text"
-          style={{ width: "500px", height: "200px" }}
-          value={feedbackTxt}
-          onChange={onChange_feedback}
-        />
-        <br></br>
-        <div>
-          <input
-            type="radio"
-            id="good"
-            name="feedback"
-            value="good"
-            onChange={onChange_evaluation}
-          />
-          <label htmlFor="good">good</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="bad"
-            name="feedback"
-            value="bad"
-            onChange={onChange_evaluation}
-          />
-          <label htmlFor="bad">bad</label>
-        </div>
-        <button onClick={postFeedback}>submit</button>
-      </div>
+
+      <Feedback />
     </>
   );
 };

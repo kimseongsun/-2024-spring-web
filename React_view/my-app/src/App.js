@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import Home from "./pages/Home/Home";
 
-import LoginButton from "./pages/login/LoginButton";
-
 import { UserProvider, UserContext } from "./pages/UserContext";
 import GoogleLoginButton from "./pages/login/GoogleLoginButton";
 

@@ -33,7 +33,8 @@ let answer_query = [
   },
   {
     2: "Dota: Dota는 아주 재밌는 게임입니다!",
-    image_link: "http://image_link",
+    image_link:
+      "https://png.pngtree.com/png-clipart/20220620/ourmid/pngtree-pink-cute-cat-icon-animal-png-yuri-png-image_5230763.png",
     tag: "tag1, tag2, tag3",
   },
 ];

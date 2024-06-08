@@ -33,11 +33,3 @@
 }
 
 /* 피드백 컨테이너 스타일 */
-.feedback-container {
-  margin-left: 200px;
-  position: fixed;
-  top: 50%;
-  right: 100px;
-  transform: translateY(-50%);
-  box-sizing: border-box;
-}
