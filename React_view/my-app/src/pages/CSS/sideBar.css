@@ -1,0 +1,67 @@
+/* 2차 이상의 메뉴를 숨기기 */
+/* .side-bar > ul ul {
+  display: none;
+} */
+
+/* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
+body {
+  /* height: 5000px; */
+  padding-top: 0%;
+  padding-bottom: 0%;
+  padding-left: 0%;
+  margin: 0;
+}
+
+/* 사이드바의 너비와 높이를 변수를 통해 통제 */
+:root {
+  --side-bar-width: 270px;
+  --side-bar-height: 100vh;
+}
+
+.side-bar {
+  position: fixed; /* 스크롤을 따라오도록 지정 */
+  background-color: rgb(137, 223, 187);
+  width: var(--side-bar-width);
+  min-height: var(
+    --side-bar-height
+  ); /* 사이드바의 높이를 전체 화면 높이의 100%로 지정 */
+  margin-top: calc(
+    (100vh - var(--side-bar-height)) / 2
+  ); /*사이드바 위와 아래의 마진을 동일하게 지정*/
+}
+
+/* 모든 메뉴의 a에 속성값 부여 */
+.side-bar ul > li > a {
+  display: block;
+  color: rgb(0, 0, 0);
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+}
+
+.username {
+  position: absolute; /* 절대 위치 지정 */
+  bottom: 80px; /* 사이드바 맨 아래에 고정 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+  color: black;
+  font-weight: bold;
+}
+.Logout {
+  color: white;
+  position: absolute; /* 절대 위치 지정 */
+  bottom: 10px; /* 사이드바 맨 아래에 고정 */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.centered-container {
+  position: fixed; /* 고정 위치 */
+  top: 50%; /* 화면 상단에서 50% 위치 */
+  left: 50%; /* 화면 왼쪽에서 50% 위치 */
+  transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 중앙으로 이동 */
+  text-align: center; /* 텍스트를 가운데 정렬 */
+}

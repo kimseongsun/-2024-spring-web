@@ -1,0 +1,43 @@
+.home-container {
+  margin: 0;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 출력 영역 스타일 */
+.output-container {
+  display: block;
+  width: 1000px;
+  height: 1500px;
+  border: 1px solid black;
+  overflow: auto;
+  white-space: pre-wrap;
+  padding: 10px;
+}
+
+/* 입력 영역 스타일 */
+.input-container {
+  display: flex;
+  width: 1000px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.input-container input {
+  flex-grow: 1;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+/* 피드백 컨테이너 스타일 */
+.feedback-container {
+  margin-left: 200px;
+  position: fixed;
+  top: 50%;
+  right: 100px;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+}
