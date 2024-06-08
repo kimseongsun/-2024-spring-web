@@ -38,7 +38,7 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
         style={{
           border: "1px solid #ccc",
           padding: "10px",
-          height: "500px",
+          Height: "500px",
           overflowY: "auto",
           width: "100%",
         }}
@@ -46,9 +46,14 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
         {answer.map((entry, index) => (
           <div key={index}>
             <div>{entry}</div>
-            <img src={image[index]} alt={`answer ${index}`} />
+            <img src={image[index]} />
           </div>
         ))}
+        {/* {image.map((entry, index) => (
+          <div key={index}>
+            <img src={entry} />
+          </div>
+        ))} */}
       </div>
     </Modal>
   );

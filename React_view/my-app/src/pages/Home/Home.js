@@ -3,41 +3,35 @@ import Typewriter from "typewriter-effect";
 import SideBar from "../sideBar/SideBar";
 import Feedback from "./Feedback";
 import SaveModal from "./SaveModal";
+import SidebarModal from "./SidebarModal"; // SidebarModal 추가
 import "../CSS/home.css"; // CSS 파일을 가져옵니다.
 import axios from "axios";
 
 const Home = () => {
   const [txtValue, setTextValue] = useState(""); // 빈 배열
   const [printedValues, setPrintedValues] = useState([]); // 출력할 값 저장
-  const [savedItems, setSavedItems] = useState([]); // 저장된 항목들
   const [modalVisible, setModalVisible] = useState(
     Array(printedValues.length).fill(false)
   );
-  const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목
+  const [savedData, setSavedData] = useState([]); // 저장된 데이터를 저장할 상태
   const scrollRef = useRef(null); // 스크롤을 제어할 ref
 
   const handleOpenModal = (index) => {
     const newModalVisible = [...modalVisible];
     newModalVisible[index] = true;
     setModalVisible(newModalVisible);
-    setSelectedItem(null); // 선택된 항목을 초기화
   };
 
   const handleCloseModal = (index) => {
     const newModalVisible = [...modalVisible];
     newModalVisible[index] = false;
     setModalVisible(newModalVisible);
-    setSelectedItem(null); // 선택된 항목을 초기화
   };
 
   const handleSave = (data) => {
-    setSavedItems([...savedItems, data]);
+    // 저장 로직을 처리하는 함수
+    setSavedData([...savedData, data]); // 저장된 데이터 추가
     console.log("저장된 데이터:", data);
-  };
-
-  const handleSideBarClick = (item) => {
-    setSelectedItem(item);
-    setModalVisible(true);
   };
 
   // user_Query post 요청
@@ -104,7 +98,7 @@ const Home = () => {
 
   return (
     <>
-      <SideBar items={savedItems} onItemClick={handleSideBarClick} />
+      <SideBar savedData={savedData} /> {/* savedData를 SideBar로 전달 */}
       <div className="home-container">
         <h1>Game Recommend GPT Service</h1>
 
@@ -114,6 +108,7 @@ const Home = () => {
               <p>
                 <strong>Q:</strong> {entry.question}
                 <div style={{ position: "relative" }}>
+                  {/* Save 버튼을 오른쪽 상단에 위치 */}
                   <button
                     onClick={() => handleOpenModal(index)}
                     style={{
@@ -183,19 +178,7 @@ const Home = () => {
           <button onClick={handleKeyPress}>print</button>
         </div>
       </div>
-
       <Feedback />
-
-      {selectedItem && (
-        <SaveModal
-          visible={true}
-          onClose={() => setSelectedItem(null)}
-          onSave={handleSave}
-          question={selectedItem.title}
-          answer={selectedItem.answer}
-          image={selectedItem.image}
-        />
-      )}
     </>
   );
 };
