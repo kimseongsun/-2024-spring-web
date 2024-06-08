@@ -2,16 +2,43 @@ import React, { useState, useEffect, useRef } from "react";
 import Typewriter from "typewriter-effect";
 import SideBar from "../sideBar/SideBar";
 import Feedback from "./Feedback";
+import SaveModal from "./SaveModal";
 import "../CSS/home.css"; // CSS 파일을 가져옵니다.
-
 import axios from "axios";
 
 const Home = () => {
   const [txtValue, setTextValue] = useState(""); // 빈 배열
   const [printedValues, setPrintedValues] = useState([]); // 출력할 값 저장
+  const [savedItems, setSavedItems] = useState([]); // 저장된 항목들
+  const [modalVisible, setModalVisible] = useState(
+    Array(printedValues.length).fill(false)
+  );
+  const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목
   const scrollRef = useRef(null); // 스크롤을 제어할 ref
 
-  let image_link = "";
+  const handleOpenModal = (index) => {
+    const newModalVisible = [...modalVisible];
+    newModalVisible[index] = true;
+    setModalVisible(newModalVisible);
+    setSelectedItem(null); // 선택된 항목을 초기화
+  };
+
+  const handleCloseModal = (index) => {
+    const newModalVisible = [...modalVisible];
+    newModalVisible[index] = false;
+    setModalVisible(newModalVisible);
+    setSelectedItem(null); // 선택된 항목을 초기화
+  };
+
+  const handleSave = (data) => {
+    setSavedItems([...savedItems, data]);
+    console.log("저장된 데이터:", data);
+  };
+
+  const handleSideBarClick = (item) => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
 
   // user_Query post 요청
   async function postUserQuery(txtValue) {
@@ -28,21 +55,31 @@ const Home = () => {
   async function FetchData() {
     await postUserQuery(txtValue);
     const response = await axios.get("/api/answer_Query");
-    let total_answer = "";
+
+    const entries = [];
+    const image_link = [];
+    const answers = [];
+
     response.data.forEach((obj) => {
       for (let key in obj) {
-        console.log("key: ", key);
-        total_answer += obj[key] + "\n";
         if (key === "image_link") {
-          image_link = obj[key];
+          image_link.push(obj[key]);
+        } else {
+          console.log("key: ", key);
+          answers.push(obj[key] + "\n");
         }
       }
     });
-    const newEntry = {
+    const entry = {
       question: txtValue,
-      answer: total_answer,
+      answer: answers,
+      image: image_link,
     };
-    setPrintedValues([...printedValues, newEntry]);
+    entries.push(entry);
+
+    setPrintedValues([...printedValues, ...entries]);
+    setModalVisible([...modalVisible, false]);
+    console.log("printValues", printedValues);
     setTextValue("");
   }
 
@@ -67,49 +104,74 @@ const Home = () => {
 
   return (
     <>
-      <SideBar />
+      <SideBar items={savedItems} onItemClick={handleSideBarClick} />
       <div className="home-container">
         <h1>Game Recommend GPT Service</h1>
 
-        {/*  */}
         <div ref={scrollRef} className="output-container">
           {printedValues.map((entry, index) => (
             <div key={index}>
               <p>
                 <strong>Q:</strong> {entry.question}
+                <div style={{ position: "relative" }}>
+                  <button
+                    onClick={() => handleOpenModal(index)}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                    }}
+                  >
+                    Save
+                  </button>
+                  <SaveModal
+                    visible={modalVisible[index]}
+                    onClose={() => handleCloseModal(index)}
+                    onSave={handleSave}
+                    question={entry.question}
+                    answer={entry.answer}
+                    image={entry.image}
+                  />
+                </div>
               </p>
               <div>
                 <strong>A:</strong>
-                <div>
-                  <img
-                    src="./cat.png"
-                    style={{
-                      maxWidth: "50%",
-                      height: "auto",
-                      paddingTop: "10px",
-                    }}
-                  />
-                  <Typewriter
-                    onInit={(typewriter) => {
-                      typewriter.typeString(entry.answer).start().pauseFor(100);
-                    }}
-                    onStep={(step, typewriter) => {
-                      if (scrollRef.current) {
-                        scrollRef.current.scrollTop =
-                          scrollRef.current.scrollHeight;
-                      }
-                    }}
-                    options={{
-                      delay: 1,
-                    }}
-                  />
-                </div>
+                {entry.answer.map((ans, ansIndex) => (
+                  <div key={ansIndex}>
+                    {entry.image[ansIndex] && (
+                      <img
+                        src={entry.image[ansIndex]}
+                        alt="Answer related"
+                        style={{
+                          maxWidth: "50%",
+                          height: "auto",
+                          paddingTop: "10px",
+                        }}
+                      />
+                    )}
+                    <>
+                      <Typewriter
+                        onInit={(typewriter) => {
+                          typewriter.typeString(ans).start();
+                        }}
+                        onStep={(step, typewriter) => {
+                          if (scrollRef.current) {
+                            scrollRef.current.scrollTop =
+                              scrollRef.current.scrollHeight;
+                          }
+                        }}
+                        options={{
+                          delay: 1,
+                        }}
+                      />
+                    </>
+                  </div>
+                ))}
               </div>
               <hr />
             </div>
           ))}
         </div>
-        {/*  */}
 
         <div className="input-container">
           <input
@@ -123,6 +185,17 @@ const Home = () => {
       </div>
 
       <Feedback />
+
+      {selectedItem && (
+        <SaveModal
+          visible={true}
+          onClose={() => setSelectedItem(null)}
+          onSave={handleSave}
+          question={selectedItem.title}
+          answer={selectedItem.answer}
+          image={selectedItem.image}
+        />
+      )}
     </>
   );
 };

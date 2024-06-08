@@ -39,9 +39,9 @@ function Feedback() {
         />
       </div>
       <h3>FeedBack</h3>
-      <input
+      <textarea
         type="text"
-        style={{ width: "500px", height: "200px" }}
+        style={{ width: "500px", height: "200px", resize: "none" }}
         value={feedbackTxt}
         onChange={onChange_feedback}
       />

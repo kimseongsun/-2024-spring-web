@@ -32,4 +32,10 @@
   box-sizing: border-box;
 }
 
+.save-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 /* 피드백 컨테이너 스타일 */
