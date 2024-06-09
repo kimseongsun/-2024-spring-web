@@ -9,8 +9,6 @@ const bodyParser = require("body-parser");
 
 const jwtDecode = require("jwt-decode");
 
-const { OAuth2Client } = require("google-auth-library");
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
