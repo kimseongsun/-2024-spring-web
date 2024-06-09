@@ -8,7 +8,7 @@ const SidebarModal = ({ data, visible, onClose }) => {
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       onCancel={onClose}
       footer={[
         <Button key="close" onClick={onClose}>
@@ -32,47 +32,10 @@ const SidebarModal = ({ data, visible, onClose }) => {
         {data.answer.map((entry, index) => (
           <div key={index}>
             <div>{entry}</div>
-            <img src={data.image[index]} />
+            <img src={data.image[index]} alt="./cat.png" />
           </div>
         ))}
-        {/* {image.map((entry, index) => (
-          <div key={index}>
-            <img src={entry} />
-          </div>
-        ))} */}
-
-        {/* <label htmlFor="title">제목:</label>
-      <input
-        id="title"
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="제목을 입력하세요"
-      />
-      <label htmlFor="answer">내용:</label>
-      <div
-        id="answer"
-        style={{
-          border: "1px solid #ccc",
-          padding: "10px",
-          Height: "500px",
-          overflowY: "auto",
-          width: "100%",
-        }}
-      >
-        {answer.map((entry, index) => (
-          <div key={index}>
-            <div>{entry}</div>
-            <img src={image[index]} />
-          </div>
-        ))}
-        {/* {image.map((entry, index) => (
-          <div key={index}>
-            <img src={entry} />
-          </div>
-        ))} */}
       </div>{" "}
-      */}
     </Modal>
   );
 };

@@ -105,7 +105,7 @@ const Home = () => {
         <div ref={scrollRef} className="output-container">
           {printedValues.map((entry, index) => (
             <div key={index}>
-              <p>
+              <div>
                 <strong>Q:</strong> {entry.question}
                 <div style={{ position: "relative" }}>
                   {/* Save 버튼을 오른쪽 상단에 위치 */}
@@ -128,7 +128,7 @@ const Home = () => {
                     image={entry.image}
                   />
                 </div>
-              </p>
+              </div>
               <div>
                 <strong>A:</strong>
                 {entry.answer.map((ans, ansIndex) => (
@@ -136,9 +136,9 @@ const Home = () => {
                     {entry.image[ansIndex] && (
                       <img
                         src={entry.image[ansIndex]}
-                        alt="Answer related"
+                        alt="./cat.png"
                         style={{
-                          maxWidth: "50%",
+                          maxWidth: "35%",
                           height: "auto",
                           paddingTop: "10px",
                         }}
@@ -174,6 +174,7 @@ const Home = () => {
             value={txtValue}
             onChange={onChange}
             onKeyPress={handleKeyPress}
+            placeholder="원하는 게임을 입력하세요!"
           />
           <button onClick={handleKeyPress}>print</button>
         </div>

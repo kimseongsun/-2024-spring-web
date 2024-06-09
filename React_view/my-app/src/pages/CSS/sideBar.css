@@ -14,7 +14,7 @@ body {
 
 /* 사이드바의 너비와 높이를 변수를 통해 통제 */
 :root {
-  --side-bar-width: 270px;
+  --side-bar-width: 230px;
   --side-bar-height: 100vh;
 }
 
@@ -28,17 +28,20 @@ body {
   margin-top: calc(
     (100vh - var(--side-bar-height)) / 2
   ); /*사이드바 위와 아래의 마진을 동일하게 지정*/
+  font-size: 1.2rem;
 }
 
 /* 모든 메뉴의 a에 속성값 부여 */
 .side-bar ul > li > a {
   display: block;
   color: rgb(0, 0, 0);
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: bold;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 50px;
+  /* padding-left: 20px; */
+  padding-right: 20px;
+  text-align: center;
 }
 
 .username {
@@ -46,7 +49,6 @@ body {
   bottom: 80px; /* 사이드바 맨 아래에 고정 */
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.4rem;
   color: black;
   font-weight: bold;
 }

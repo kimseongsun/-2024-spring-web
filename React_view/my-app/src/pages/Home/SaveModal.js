@@ -12,7 +12,7 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
   return (
     <Modal
       title="저장하기"
-      visible={visible}
+      open={visible}
       onCancel={onClose}
       footer={[
         <Button key="cancel" onClick={onClose}>
@@ -22,7 +22,7 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
           저장
         </Button>,
       ]}
-      width={1000}
+      width={800}
     >
       <label htmlFor="title">제목:</label>
       <input
@@ -38,7 +38,7 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
         style={{
           border: "1px solid #ccc",
           padding: "10px",
-          Height: "500px",
+          Height: "400px",
           overflowY: "auto",
           width: "100%",
         }}
@@ -46,7 +46,7 @@ const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
         {answer.map((entry, index) => (
           <div key={index}>
             <div>{entry}</div>
-            <img src={image[index]} />
+            <img src={image[index]} alt="./cat.png" />
           </div>
         ))}
         {/* {image.map((entry, index) => (

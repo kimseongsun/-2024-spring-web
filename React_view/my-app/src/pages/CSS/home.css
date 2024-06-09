@@ -10,18 +10,20 @@
 /* 출력 영역 스타일 */
 .output-container {
   display: block;
-  width: 1000px;
-  height: 1500px;
+  width: 800px;
+  height: 1200px;
   border: 1px solid black;
   overflow: auto;
   white-space: pre-wrap;
   padding: 10px;
+  font-size: 1.2rem;
+  color: black;
 }
 
 /* 입력 영역 스타일 */
 .input-container {
   display: flex;
-  width: 1000px;
+  width: 800px;
   max-width: 100%;
   box-sizing: border-box;
 }

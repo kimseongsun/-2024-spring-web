@@ -26,14 +26,15 @@ let user_query = "";
 //수정 필요함
 let answer_query = [
   {
-    1: "LoL: LOL은 아주 좋은aaaa 게임입니다!!!!!!!!!!\n Tag1, tag2, tag3, ...",
+    answer:
+      "LoL: LOL은 아주 좋은aaaa 게임입니다!!!!!!!!!!\n Tag1, tag2, tag3, ...",
     // tag: "",
     image_link:
       "https://png.pngtree.com/png-clipart/20220620/ourmid/pngtree-pink-cute-cat-icon-animal-png-yuri-png-image_5230763.png",
     // game_link:"",
   },
   {
-    2: "Dota: Dota는 아주 재밌는 게임입니다!\n tag1, tag2, tag3",
+    answer: "Dota: Dota는 아주 재밌는 게임입니다!\n tag1, tag2, tag3",
     image_link:
       "https://png.pngtree.com/png-clipart/20220620/ourmid/pngtree-pink-cute-cat-icon-animal-png-yuri-png-image_5230763.png",
     // tag: "",
