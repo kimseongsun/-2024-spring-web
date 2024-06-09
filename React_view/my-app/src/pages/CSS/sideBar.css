@@ -1,5 +1,4 @@
 .side-bar {
-  position: fixed; /* 스크롤을 따라오도록 지정 */
   background-color: rgb(137, 223, 187);
 
   width: 230px;
@@ -25,17 +24,18 @@
 .username {
   position: absolute; /* 절대 위치 지정 */
   bottom: 80px; /* 사이드바 맨 아래에 고정 */
-  left: 50%;
-  transform: translateX(-50%);
+  left: 6%; /* 왼쪽 기준으로 가운데 정렬 */
+  transform: translateX(-50%); /* 수평 가운데 정렬 */
   color: black;
   font-weight: bold;
 }
+
 .Logout {
-  color: white;
   position: absolute; /* 절대 위치 지정 */
   bottom: 10px; /* 사이드바 맨 아래에 고정 */
-  left: 50%;
-  transform: translateX(-50%);
+  left: 6%; /* 왼쪽 기준으로 가운데 정렬 */
+  transform: translateX(-50%); /* 수평 가운데 정렬 */
+  color: white;
 }
 
 .centered-container {
