@@ -37,8 +37,8 @@ function Feedback() {
           src="./cat.png"
           style={{ maxWidth: "50%", height: "auto", paddingTop: "10px" }}
         />
+        <h3>FeedBack</h3>
       </div>
-      <h3>FeedBack</h3>
       <textarea
         type="text"
         style={{
@@ -52,7 +52,7 @@ function Feedback() {
         onChange={onChange_feedback}
       />
       <br></br>
-      <div>
+      <div style={{ width: "200px" }}>
         <input
           type="radio"
           id="good"
@@ -60,9 +60,15 @@ function Feedback() {
           value="good"
           onChange={onChange_evaluation}
         />
-        <label htmlFor="good">good</label>
+        <label htmlFor="good">
+          <img
+            src="./good.png"
+            alt=""
+            style={{ maxWidth: "35%", height: "auto" }}
+          />
+        </label>
       </div>
-      <div>
+      <div style={{ width: "200px" }}>
         <input
           type="radio"
           id="bad"
@@ -70,19 +76,25 @@ function Feedback() {
           value="bad"
           onChange={onChange_evaluation}
         />
-        <label htmlFor="bad">bad</label>
+        <label htmlFor="bad">
+          <img
+            src="./bad.png"
+            alt=""
+            style={{ maxWidth: "30%", height: "auto" }}
+          />
+        </label>
       </div>
       <button onClick={postFeedback}>submit</button>
     </div>
   ) : (
     <div className="feedback-container">
-      <div style={{ width: "500px" }}>
+      <div style={{ width: "350px" }}>
         <img
           src="./cat.png"
           style={{ maxWidth: "50%", height: "auto", paddingTop: "10px" }}
         />
+        <h3>Feedback 제출 완료</h3>
       </div>
-      <h3>Feedback 제출 완료</h3>
       <button onClick={() => setVisible(true)}>다시 제출</button>
     </div>
   );
