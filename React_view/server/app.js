@@ -23,7 +23,6 @@ let user_email = "";
 let evaluation = false;
 let user_feedback = "";
 let user_query = "";
-//수정 필요함
 let answer_query = [
   {
     answer:
@@ -42,6 +41,7 @@ let answer_query = [
   },
 ];
 
+//초기 로그인 화면
 app.post("/login", async (req, res) => {
   console.log("AXIOS 성공!");
   const access_token = String(req.headers.authorization.split("[0]")); // 액세스 토큰 추출
@@ -60,8 +60,6 @@ app.get("/home", async (req, res) => {
   console.log("AXIOS 성공!");
   res.json(user_name);
 });
-
-//초기 로그인 화면
 
 app.get("/answer_Query", async (req, res) => {
   console.log("answer_Query Get Axios 성공!");
@@ -92,13 +90,52 @@ app.post("/feedback", async (req, res) => {
     console.error(error);
   }
 });
-const feedbackData = {
-  st_id: user_email,
-  input: user_query,
-  output: answer_query,
-  satisfied: evaluation,
-  feedback: user_feedback,
-};
+
+//저장버튼 눌렀을 때 동작
+app.post("/save_modal", async (req, res) => {
+  try {
+    console.log("save_modal Post처리 동작!");
+    const save_data = {
+      title: req.body.title,
+      answers: req.body.answers,
+      images: req.body.images,
+    };
+    console.log("유저가 저장하려고 하는 data: ", save_data);
+  } catch (error) {}
+});
+
+//DB에서 saved_modal받아오는 동작 이 함수에 추가되야 함
+//현재는 임시의 데이터를 넘김
+app.get("/get_saved_modal", async (req, res) => {
+  const saved_modal = [
+    {
+      title: "공포게임 추천좀",
+      answer: [
+        "아웃라스트: good\n Tag1, tag2, tag3, ...\n",
+        "프란체스카: Dota는 아주 재밌는 게임입니다!\n tag1, tag2, tag3\n",
+      ],
+      image: [
+        "https://i.namu.wiki/i/i255o_1T071_2LKEUu5AEf3zxKRlfjyeykD4iFF3FHy0L6OokPuIOKjFrh_mFdusrzGwnMr-nP3NRZGtncg9KQ.webp",
+        "https://blog.kakaocdn.net/dn/bpPn6e/btqNCyBzkrA/trWKadLKdLi67GrYVWZo9k/img.png",
+      ],
+    },
+    {
+      title: "격투게임 추천좀",
+      answer: [
+        "스트리트파이터: LOL은 아주 좋은aaaa 게임입니다!!!!!!!!!!\n Tag1, tag2, tag3, ...\n",
+        "철권: Dota는 아주 재밌는 게임입니다!\n tag1, tag2, tag3\n",
+      ],
+      image: [
+        "https://i.namu.wiki/i/N_MIvNeHhaG9V1CEt7UMahE83oAGdDBO5WP6C95H7asqTRdSHzwFozWHfBwgqbUJwpLQ_P_XX5rW_WnpusVhbg.webp",
+        "https://image.dongascience.com/Photo/2018/03/43d397eddb96c7a9d2ad16061347c688.jpg",
+      ],
+    },
+  ]; //임시 데이터
+
+  try {
+    res.json(saved_modal);
+  } catch (error) {}
+});
 
 app.listen(port, () => {
   console.log("Sever Start!");

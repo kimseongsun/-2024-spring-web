@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
+import axios from "axios";
 
 const SaveModal = ({ visible, onClose, onSave, question, answer, image }) => {
   const [title, setTitle] = useState(question);
 
+  async function postSaveModal(title, answer, image) {
+    try {
+      const response = await axios.post("/api/save_modal", {
+        title: title,
+        answers: answer,
+        images: image,
+      });
+    } catch (error) {
+      console.error("PostSaveModal에서 문제 발생", error);
+    }
+  }
+
   const handleSave = () => {
     onSave({ title, answer, image });
+    postSaveModal(title, answer, image);
     onClose();
   };
 

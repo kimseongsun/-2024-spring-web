@@ -11,10 +11,10 @@ const SideBar = ({ savedData }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    FetchData();
+    getUserName();
   }, []);
 
-  async function FetchData() {
+  async function getUserName() {
     try {
       const response = await axios.get("/api/home");
       // 프록시가 여기서만 적용이 안되는 문제 발생

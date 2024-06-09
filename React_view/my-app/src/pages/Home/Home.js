@@ -3,7 +3,6 @@ import Typewriter from "typewriter-effect";
 import SideBar from "../sideBar/SideBar";
 import Feedback from "./Feedback";
 import SaveModal from "./SaveModal";
-import SidebarModal from "./SidebarModal"; // SidebarModal 추가
 import "../CSS/home.css"; // CSS 파일을 가져옵니다.
 import axios from "axios";
 
@@ -16,6 +15,21 @@ const Home = () => {
   const [savedData, setSavedData] = useState([]); // 저장된 데이터를 저장할 상태
   const scrollRef = useRef(null); // 스크롤을 제어할 ref
 
+  // 출력값 스크롤 최하단 이동
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [printedValues]);
+
+  useEffect(() => {
+    getSavedModal();
+  }, []);
+
+  useEffect(() => {
+    console.log("savedData: ", savedData);
+  }, [savedData]);
+
   const handleOpenModal = (index) => {
     const newModalVisible = [...modalVisible];
     newModalVisible[index] = true;
@@ -27,6 +41,17 @@ const Home = () => {
     newModalVisible[index] = false;
     setModalVisible(newModalVisible);
   };
+
+  async function getSavedModal() {
+    try {
+      const response = await axios.get("/api/get_saved_modal");
+      console.log("saved_modal 받아오기 성공!");
+      console.log("savedModal:", response.data);
+      setSavedData(response.data);
+    } catch (error) {
+      console.error("Error fetching saved modal data:", error);
+    }
+  }
 
   const handleSave = (data) => {
     // 저장 로직을 처리하는 함수
@@ -88,13 +113,6 @@ const Home = () => {
       FetchData();
     }
   };
-
-  // 출력값 스크롤 최하단 이동
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [printedValues]);
 
   return (
     <>

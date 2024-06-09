@@ -32,7 +32,11 @@ const SidebarModal = ({ data, visible, onClose }) => {
         {data.answer.map((entry, index) => (
           <div key={index}>
             <div>{entry}</div>
-            <img src={data.image[index]} alt="./cat.png" />
+            <img
+              src={data.image[index]}
+              alt="./cat.png"
+              style={{ maxWidth: "90%", height: "auto", paddingTop: "10px" }}
+            />
           </div>
         ))}
       </div>{" "}
