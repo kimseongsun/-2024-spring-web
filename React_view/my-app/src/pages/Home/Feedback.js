@@ -32,27 +32,27 @@ function Feedback() {
 
   return visible ? (
     <div className="feedback-container">
-      <div style={{ width: "350px" }}>
+      <div style={{ width: "175px" }}>
         <img
           src="./cat.png"
-          style={{ maxWidth: "50%", height: "auto", paddingTop: "10px" }}
+          style={{ maxWidth: "100%", height: "auto", paddingTop: "10px" }}
         />
         <h3>FeedBack</h3>
       </div>
       <textarea
         type="text"
         style={{
-          width: "400px",
+          width: "250px",
           height: "175px",
           resize: "none",
-          fontSize: "1.2rem",
+          fontSize: "1.0rem",
         }}
         value={feedbackTxt}
         placeholder="소중한 의견 부탁드려요 :D"
         onChange={onChange_feedback}
       />
       <br></br>
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "175px" }}>
         <input
           type="radio"
           id="good"
@@ -68,7 +68,7 @@ function Feedback() {
           />
         </label>
       </div>
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "175px" }}>
         <input
           type="radio"
           id="bad"
@@ -88,7 +88,7 @@ function Feedback() {
     </div>
   ) : (
     <div className="feedback-container">
-      <div style={{ width: "350px" }}>
+      <div style={{ width: "175px" }}>
         <img
           src="./cat.png"
           style={{ maxWidth: "50%", height: "auto", paddingTop: "10px" }}

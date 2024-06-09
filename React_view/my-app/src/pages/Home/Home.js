@@ -99,87 +99,89 @@ const Home = () => {
   return (
     <>
       <SideBar savedData={savedData} /> {/* savedData를 SideBar로 전달 */}
-      <div className="home-container">
-        <h1>Game Recommend GPT Service</h1>
+      <div className="home-page">
+        <div className="home-container">
+          <h1>Game Recommend GPT Service</h1>
 
-        <div ref={scrollRef} className="output-container">
-          {printedValues.map((entry, index) => (
-            <div key={index}>
-              <div>
-                <strong>Q:</strong> {entry.question}
-                <div style={{ position: "relative" }}>
-                  {/* Save 버튼을 오른쪽 상단에 위치 */}
-                  <button
-                    onClick={() => handleOpenModal(index)}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    Save
-                  </button>
-                  <SaveModal
-                    visible={modalVisible[index]}
-                    onClose={() => handleCloseModal(index)}
-                    onSave={handleSave}
-                    question={entry.question}
-                    answer={entry.answer}
-                    image={entry.image}
-                  />
-                </div>
-              </div>
-              <div>
-                <strong>A:</strong>
-                {entry.answer.map((ans, ansIndex) => (
-                  <div key={ansIndex}>
-                    {entry.image[ansIndex] && (
-                      <img
-                        src={entry.image[ansIndex]}
-                        alt="./cat.png"
-                        style={{
-                          maxWidth: "35%",
-                          height: "auto",
-                          paddingTop: "10px",
-                        }}
-                      />
-                    )}
-                    <>
-                      <Typewriter
-                        onInit={(typewriter) => {
-                          typewriter.typeString(ans).start();
-                        }}
-                        onStep={(step, typewriter) => {
-                          if (scrollRef.current) {
-                            scrollRef.current.scrollTop =
-                              scrollRef.current.scrollHeight;
-                          }
-                        }}
-                        options={{
-                          delay: 1,
-                        }}
-                      />
-                    </>
+          <div ref={scrollRef} className="output-container">
+            {printedValues.map((entry, index) => (
+              <div key={index}>
+                <div>
+                  <strong>Q:</strong> {entry.question}
+                  <div style={{ position: "relative" }}>
+                    {/* Save 버튼을 오른쪽 상단에 위치 */}
+                    <button
+                      onClick={() => handleOpenModal(index)}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                      }}
+                    >
+                      Save
+                    </button>
+                    <SaveModal
+                      visible={modalVisible[index]}
+                      onClose={() => handleCloseModal(index)}
+                      onSave={handleSave}
+                      question={entry.question}
+                      answer={entry.answer}
+                      image={entry.image}
+                    />
                   </div>
-                ))}
+                </div>
+                <div>
+                  <strong>A:</strong>
+                  {entry.answer.map((ans, ansIndex) => (
+                    <div key={ansIndex}>
+                      {entry.image[ansIndex] && (
+                        <img
+                          src={entry.image[ansIndex]}
+                          alt="./cat.png"
+                          style={{
+                            maxWidth: "35%",
+                            height: "auto",
+                            paddingTop: "10px",
+                          }}
+                        />
+                      )}
+                      <>
+                        <Typewriter
+                          onInit={(typewriter) => {
+                            typewriter.typeString(ans).start();
+                          }}
+                          onStep={(step, typewriter) => {
+                            if (scrollRef.current) {
+                              scrollRef.current.scrollTop =
+                                scrollRef.current.scrollHeight;
+                            }
+                          }}
+                          options={{
+                            delay: 1,
+                          }}
+                        />
+                      </>
+                    </div>
+                  ))}
+                </div>
+                <hr />
               </div>
-              <hr />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="input-container">
-          <input
-            type="text"
-            value={txtValue}
-            onChange={onChange}
-            onKeyPress={handleKeyPress}
-            placeholder="원하는 게임을 입력하세요!"
-          />
-          <button onClick={handleKeyPress}>print</button>
+          <div className="input-container">
+            <input
+              type="text"
+              value={txtValue}
+              onChange={onChange}
+              onKeyPress={handleKeyPress}
+              placeholder="원하는 게임을 입력하세요!"
+            />
+            <button onClick={handleKeyPress}>print</button>
+          </div>
         </div>
+        <Feedback />
       </div>
-      <Feedback />
     </>
   );
 };
