@@ -35,13 +35,13 @@ const SideBar = ({ savedData }) => {
   };
 
   return (
-    <aside className="side-bar">
+    <div className="side-bar">
       <ul>
         <div>
           <img
             src="./gameIcon.png"
             style={{ maxWidth: "90%", height: "auto", paddingTop: "10px" }}
-            alt=""
+            alt="Game Icon"
           />
           {/* img Default경로는 public으로 되어 있음 */}
           <p style={{ paddingLeft: "20px" }}>Game Recommend</p>
@@ -66,7 +66,7 @@ const SideBar = ({ savedData }) => {
           onClose={handleCloseModal}
         />
       )}
-    </aside>
+    </div>
   );
 };
 

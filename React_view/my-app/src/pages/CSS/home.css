@@ -1,8 +1,6 @@
-.home-page {
+.home-main {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
+  flex-direction: row;
 }
 
 .home-container {
@@ -12,6 +10,7 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  padding-left: 300px;
 }
 
 /* 출력 영역 스타일 */

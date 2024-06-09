@@ -7,7 +7,7 @@ import GoogleLoginButton from "./pages/login/GoogleLoginButton";
 function App() {
   return (
     <UserProvider>
-      <div className="App">
+      <div className="App" style={{ display: "flex" }}>
         <AppContent />
       </div>
     </UserProvider>

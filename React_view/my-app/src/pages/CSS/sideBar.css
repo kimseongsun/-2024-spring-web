@@ -1,34 +1,12 @@
-/* 2차 이상의 메뉴를 숨기기 */
-/* .side-bar > ul ul {
-  display: none;
-} */
-
-/* 사이트의 높이를 5000px로 만들어 스크롤 생성 */
-body {
-  /* height: 5000px; */
-  padding-top: 0%;
-  padding-bottom: 0%;
-  padding-left: 0%;
-  margin: 0;
-}
-
-/* 사이드바의 너비와 높이를 변수를 통해 통제 */
-:root {
-  --side-bar-width: 230px;
-  --side-bar-height: 100vh;
-}
-
 .side-bar {
   position: fixed; /* 스크롤을 따라오도록 지정 */
   background-color: rgb(137, 223, 187);
-  width: var(--side-bar-width);
-  min-height: var(
-    --side-bar-height
-  ); /* 사이드바의 높이를 전체 화면 높이의 100%로 지정 */
-  margin-top: calc(
-    (100vh - var(--side-bar-height)) / 2
-  ); /*사이드바 위와 아래의 마진을 동일하게 지정*/
+
+  width: 230px;
+  min-height: 100vh;
+
   font-size: 1.2rem;
+  display: flex;
 }
 
 /* 모든 메뉴의 a에 속성값 부여 */
